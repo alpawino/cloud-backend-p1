@@ -11,7 +11,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      # Pendiente: Reemplazar <TU_VM_BDS_IP> cuando crees la Máquina 3
+      
       DATABASE_URL: mysql+pymysql://root:root@172.31.82.16:3306/usersdb
 
   # ==========================================
@@ -24,7 +24,7 @@ services:
     ports:
       - "4000:4000"
     environment:
-      # Pendiente: Reemplazar <TU_VM_BDS_IP> cuando crees la Máquina 3
+      
       MONGO_URI: mongodb://172.31.82.16:27017/productsDB
 
   # ==========================================
@@ -37,7 +37,7 @@ services:
     ports:
       - "8083:8083"
     environment:
-      # Pendiente: Reemplazar <TU_VM_BDS_IP> cuando crees la Máquina 3
+      
       - DB_URL=jdbc:postgresql://172.31.82.16:5432/orders_db
       - DB_USERNAME=root
       - DB_PASSWORD=root
