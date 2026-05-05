@@ -12,7 +12,7 @@ try:
         dbname="orders_db",
         user="root",
         password="root",
-        host="<TU_VM_BDS_IP>",
+        host="172.31.82.16",
         port="5432"
     )
     cursor = conn.cursor()

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const mongoURI = process.env.MONGO_URI || "mongodb://<TU_VM_BDS_IP>:27017/productsDB";
+const mongoURI = process.env.MONGO_URI || "mongodb://172.31.82.16:27017/productsDB";
 mongoose.connect(mongoURI)
   .then(() => console.log("Mongo conectado para Sembrar 😼"))
   .catch(err => {
