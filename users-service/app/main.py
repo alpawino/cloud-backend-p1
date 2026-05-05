@@ -17,30 +17,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# 🔁 Esperar a MySQL (clave en Docker)
-def wait_for_db():
-    while True:
-        try:
-            conn = pymysql.connect(
-                host="mysql",   # 👈 nombre del servicio en docker-compose
-                user="root",
-                password="root",
-                database="usersdb"
-            )
-            conn.close()
-            print("✅ MySQL listo")
-            break
-        except Exception as e:
-            print("⏳ Esperando MySQL...", e)
-            time.sleep(3)
-
 
 @app.on_event("startup")
 def startup_event():
-    wait_for_db()
     Base.metadata.create_all(bind=engine)
-    print("🚀 API lista")
-
+    print("🚀 API lista y tablas sincronizadas")
 
 # 📦 Dependencia DB
 def get_db():
