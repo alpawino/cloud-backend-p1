@@ -12,11 +12,13 @@ db: Session = SessionLocal()
 def hash_password(password):
     return pwd_context.hash(password)
 
+hashed_pwd = hash_password("123456")
+
 for i in range(20000):
     user = models.User(
         name=fake.name(),
         email=fake.unique.email(),
-        password=hash_password("123456")
+        password=hashed_pwd
     )
     db.add(user)
 
