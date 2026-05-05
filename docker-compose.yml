@@ -42,4 +42,17 @@ services:
       - DB_USERNAME=root
       - DB_PASSWORD=root
 
+  # ==========================================
+  # MS 4: HISTORIAL/AGREGADOR (Python/FastAPI)
+  # No tiene BD, solo consume otros servicios
+  # ==========================================
+  history-api:
+    build: ./history-service
+    container_name: history-api
+    restart: always
+    ports:
+      - "8001:8001"
+    environment:
+      USERS_URL: http://users-api:8000
+      ORDERS_URL: http://orders-service:8083/api
 
