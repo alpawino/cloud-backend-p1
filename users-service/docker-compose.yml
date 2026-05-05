@@ -1,0 +1,25 @@
+services:
+  mysql:
+    image: mysql:8
+    container_name: users-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: usersdb
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  users:
+    build: .
+    container_name: users-api
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mysql
+    environment:
+      DATABASE_URL: mysql+pymysql://root:root@mysql:3306/usersdb
+
+volumes:
+  mysql_data:

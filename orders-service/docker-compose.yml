@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  orders-service:
+    build: .
+    container_name: orders-service
+    restart: always
+    ports:
+      - "8083:8083"
+    environment:
+      - DB_URL=${DB_URL:-jdbc:postgresql://aws-1-us-west-2.pooler.supabase.com:5432/postgres?sslmode=require}
+      - DB_USERNAME=${DB_USERNAME:-postgres.gfzkaremndkievsunioz}
+      - DB_PASSWORD=${DB_PASSWORD:-hagoestoconfiebre}

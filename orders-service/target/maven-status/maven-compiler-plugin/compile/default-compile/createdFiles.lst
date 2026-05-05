@@ -1,0 +1,12 @@
+com\ecommerce\orders\model\Order.class
+com\ecommerce\orders\OrdersServiceApplication.class
+com\ecommerce\orders\model\OrderStatus.class
+com\ecommerce\orders\dto\OrderDetailResponse.class
+com\ecommerce\orders\service\OrderService.class
+com\ecommerce\orders\controller\OrderController.class
+com\ecommerce\orders\dto\CreateOrderItemRequest.class
+com\ecommerce\orders\controller\RestExceptionHandler.class
+com\ecommerce\orders\dto\OrderResponse.class
+com\ecommerce\orders\dto\CreateOrderRequest.class
+com\ecommerce\orders\repository\OrderRepository.class
+com\ecommerce\orders\model\OrderDetail.class
