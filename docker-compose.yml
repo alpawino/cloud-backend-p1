@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # ==========================================
+  # MS 1: USUARIOS (Python/FastAPI)
+  # ==========================================
+  users-api:
+    build: ./users-service
+    container_name: users-api
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      # Pendiente: Reemplazar <TU_VM_BDS_IP> cuando crees la Máquina 3
+      DATABASE_URL: mysql+pymysql://root:root@172.31.82.16:3306/usersdb
+
+  # ==========================================
+  # MS 2: PRODUCTOS (Node.js)
+  # ==========================================
+  productos-api:
+    build: ./productos-service
+    container_name: productos-api
+    restart: always
+    ports:
+      - "4000:4000"
+    environment:
+      # Pendiente: Reemplazar <TU_VM_BDS_IP> cuando crees la Máquina 3
+      MONGO_URI: mongodb://172.31.82.16:27017/productsDB
+
+  # ==========================================
+  # MS 3: ÓRDENES (Java/Spring Boot)
+  # ==========================================
+  orders-api:
+    build: ./orders-service
+    container_name: orders-service
+    restart: always
+    ports:
+      - "8083:8083"
+    environment:
+      # Pendiente: Reemplazar <TU_VM_BDS_IP> cuando crees la Máquina 3
+      - DB_URL=jdbc:postgresql://172.31.82.16:5432/orders_db
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
+
+
