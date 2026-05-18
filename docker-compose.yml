@@ -11,7 +11,6 @@ services:
     ports:
       - "8000:8000"
     environment:
-      
       DATABASE_URL: mysql+pymysql://root:root@172.31.82.16:3306/usersdb
 
   # ==========================================
@@ -24,7 +23,6 @@ services:
     ports:
       - "4000:4000"
     environment:
-      
       MONGO_URI: mongodb://172.31.82.16:27017/productsDB
 
   # ==========================================
@@ -37,14 +35,12 @@ services:
     ports:
       - "8083:8083"
     environment:
-      
       - DB_URL=jdbc:postgresql://172.31.82.16:5432/orders_db
       - DB_USERNAME=root
       - DB_PASSWORD=root
 
   # ==========================================
-  # MS 4: HISTORIAL/AGREGADOR (Python/FastAPI)
-  # No tiene BD, solo consume otros servicios
+  # MS 4: HISTORIAL (Agregador)
   # ==========================================
   history-api:
     build: ./history-service
@@ -53,6 +49,18 @@ services:
     ports:
       - "8001:8001"
     environment:
-      USERS_URL: http://users-api:8000
-      ORDERS_URL: http://orders-service:8083/api
-
+      - USERS_URL=http://users-api:8000
+      - ORDERS_URL=http://orders-api:8083
+      
+  # ==========================================
+  # MS 5: INGESTA / ANALYTICS (Worker)
+  # ==========================================
+  analytics-worker:
+    build: ./analytics-worker
+    container_name: analytics-worker
+    # No exponemos puertos porque es un script que corre de fondo y muere
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}
+      - S3_BUCKET=ingesta-proyecto-final-2026
